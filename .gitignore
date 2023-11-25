@@ -1,2 +1,12 @@
 .idea
 .DS_Store
+.vscode
+
+node_modules
+dist
+build
+package-lock.json
+
+.env
+
+exported.pdf
