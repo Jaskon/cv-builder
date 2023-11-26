@@ -24,9 +24,7 @@ export default function html() {
         <body>
             <h1>CV Builder</h1>
             <p>Click <a href="/api/cv">here</a> to get your CV.</p>
-            
             <div class="separator"></div>
-            
             <p>Click <a href="/api/cv?format=pdf">here</a> to get your CV as a PDF.</p>
         </body>
         </html>
