@@ -1,18 +1,18 @@
-import puppeteer from 'puppeteer';
-import html from './html';
+import express from 'express';
+import cors from 'cors';
 
-(async () => {
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
+import router from './router';
+import { corsConfig } from './config';
 
-    await page.setContent(html());
-    // await page.goto('https://google.com');
-    await page.setViewport({ width: 795, height: 1124 });
-    console.log('page loaded');
+const app = express();
+const port = 3000
 
-    await page.pdf({ path: 'exported.pdf', format: 'A4' });
-    console.log('pdf generated');
+app.use(cors(corsConfig));
 
-    // await browser.close();
-    // console.log('browser closed');
-})();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', router);
+
+app.listen(port, () => {
+    console.log(`CV builder backend listening on port ${port}`)
+});
