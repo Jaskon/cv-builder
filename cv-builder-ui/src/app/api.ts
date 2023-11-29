@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { IGeneratePdfApi } from '../../../common-model/generatePdf';
 
 export const API = Axios.create({
   baseURL: 'http://localhost:3000/api',
@@ -7,7 +8,7 @@ export const API = Axios.create({
   },
 });
 
-export const generatePdf = async (data: any) => {
-    const response = await API.post('/generatePdf', { data });
+export const generatePdfPost = async (data: IGeneratePdfApi) => {
+    const response = await API.post('/generatePdf', data);
     return response.data;
 }

@@ -1,10 +1,11 @@
-import { Data } from './data.model';
+import { CvContent } from '../../data.model';
+import header from './header';
 
-export default function html(data: Data) {
+export default function generateCvHtml(content: CvContent): string {
     return `
         <html lang="en">
             <head>
-                <title>${data.title}</title>
+                <title>${content.title}</title>
                 <style>
                     * {
                         box-sizing: border-box;
@@ -12,53 +13,35 @@ export default function html(data: Data) {
                         padding: 0;
                     }
                     body {
-                        background-color: white;
+                        background-color: #fdfdfd;
                         font-family: sans-serif;
                         font-size: 12pt;
                         text-align: center;
                         -webkit-print-color-adjust: exact;
                     }
-                    h1 {
-                        color: darkgreen;
-                        font-size: 20pt;
-                    }
-                    p {
-                        font-size: 20pt;
-                    }
-                    a {
-                        color: red;
-                    }
                     .separator {
-                        background-color: grey;
+                        background-color: #eaeaea;
                         height: 2px;
                         margin: 30px;
                         width: 100%;
                     }
-                    
                     .global-wrapper {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        padding: 10px;
-                    }
-                    .header {
-                        background-color: black;
-                        border-radius: 10px;
-                        height: 100px;
-                        width: 100%;
                     }
                     .content-wrapper {
                         align-items: stretch;
                         display: flex;
                         flex-direction: row;
-                        padding: 10px;
+                        padding: 30px;
                         width: 100%;
                     }
                     .left-wrapper {
                         align-items: center;
                         display: flex;
                         flex-direction: column;
-                        font-size: 12pt;
+                        font-size: 10pt;
                         padding: 0 10px 0 0;
                         width: 60%;
                     }
@@ -70,7 +53,7 @@ export default function html(data: Data) {
                         width: 40%;
                     }
                     .separator-vertical {
-                        background-color: grey;
+                        background-color: #eaeaea;
                         width: 2px;
                     }
                 </style>
@@ -79,11 +62,11 @@ export default function html(data: Data) {
                 <base target="_blank" />
                 
                 <div class="global-wrapper">
-                    <header class="header"></header>
+                    ${header(content)}
                     <div class="content-wrapper">
                         <div class="left-wrapper">
-                            <h1>${data.name}</h1>
-                            <p>${data.address}</p>
+                            <h1>${content.name}</h1>
+                            <p>${content.country}</p>
                             <br>
                             <p>Click <a href="https://google.com">here</a> to get your CV.</p>
                             <div class="separator"></div>

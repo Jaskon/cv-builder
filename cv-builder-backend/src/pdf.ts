@@ -1,22 +1,22 @@
 import puppeteer from 'puppeteer';
-import html from '../../cv-html-builder/html';
-import { Data } from '../../cv-html-builder';
+import generateCvHtml from '../../cv-html-builder/html-generation';
+import { CvContent, Template } from '../../cv-html-builder';
 
-interface PdfOptions {
+interface PdfGeneratorOptions {
     headless?: boolean | 'new';
     closeBrowser?: boolean;
 }
 
-const pdfOptionsDefault: PdfOptions = {
+const pdfGeneratorOptionsDefault: PdfGeneratorOptions = {
     headless: 'new',
     closeBrowser: true,
 };
 
-export async function generatePdf(data: Data, options: PdfOptions = pdfOptionsDefault) {
+export async function generatePdf(data: CvContent, template?: Template, options: PdfGeneratorOptions = pdfGeneratorOptionsDefault) {
     const browser = await puppeteer.launch({ headless: options.headless });
     const page = await browser.newPage();
 
-    await page.setContent(html(data));
+    await page.setContent(generateCvHtml(data, template));
     await page.setViewport({ width: 795, height: 1124 });
     console.debug('page loaded');
 
@@ -29,16 +29,17 @@ export async function generatePdf(data: Data, options: PdfOptions = pdfOptionsDe
     }
 }
 
-export function validateData(data: Data): string[] {
+export function validateData(content: CvContent): string[] {
+
     const errors: string[] = [];
-    if (!data?.title) {
-        errors.push('data.title is required');
+    if (!content?.title) {
+        errors.push('content.title is required');
     }
-    if (!data?.name) {
-        errors.push('data.name is required');
+    if (!content?.name) {
+        errors.push('content.name is required');
     }
-    if (!data?.address) {
-        errors.push('data.address is required');
+    if (!content?.country) {
+        errors.push('content.country is required');
     }
     return errors;
 }

@@ -1,5 +1,11 @@
-export interface Data {
+export interface CvContent {
     title: string;
     name: string;
-    address: string;
+    country: string;
+    photo?: string;
+}
+
+export enum Template {
+    default = 'default',
+    alternative = 'alternative',
 }
