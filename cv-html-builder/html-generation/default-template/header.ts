@@ -1,4 +1,4 @@
-import { CvContent } from '../../data.model';
+import { CvContent } from '../../model';
 
 export default function header(content: CvContent) {
     return `

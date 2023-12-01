@@ -5,12 +5,42 @@ import { CvContent, Template } from '../../../cv-html-builder';
 import generateCvHtml from '../../../cv-html-builder/html-generation';
 import ControlsComponent from '@/app/controls';
 import { generatePdfPost } from '@/app/api';
+import { SectionType } from '../../../cv-html-builder/model/sections';
 
 export default function Home() {
     const [content, setContent] = useState<CvContent>({
         title: 'Frontend Developer',
         name: 'John Doe',
         country: 'United Kingdom',
+        sections: [{
+            type: SectionType.education,
+            title: 'Education',
+            items: [{
+                title: 'Computer Science',
+                institution: 'University of Oxford',
+                country: 'United Kingdom',
+                city: 'Oxford',
+                startDate: '2010',
+                endDate: '2014',
+            }, {
+                title: 'Computer Science',
+                institution: 'University of Cambridge',
+                country: 'United Kingdom',
+                city: 'Cambridge',
+                startDate: '2014',
+                endDate: '2016',
+            }]
+        }, {
+            type: SectionType.experience,
+            title: 'Experience',
+            items: [{
+                title: 'Frontend Developer',
+                company: 'Google',
+                startDate: '2014',
+                endDate: '2016',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            }]
+        }]
     });
 
     const [template, setTemplate] = useState<Template>(Template.default);

@@ -1,4 +1,4 @@
-import { CvContent } from '../../data.model';
+import { CvContent } from '../../model';
 
 export default function generateCvHtml(data: CvContent): string {
     return `

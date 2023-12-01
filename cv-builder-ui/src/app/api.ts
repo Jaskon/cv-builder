@@ -9,6 +9,6 @@ export const API = Axios.create({
 });
 
 export const generatePdfPost = async (data: IGeneratePdfApi) => {
-    const response = await API.post('/generatePdf', data);
+    const response = await API.post('/generate-pdf', data);
     return response.data;
 }

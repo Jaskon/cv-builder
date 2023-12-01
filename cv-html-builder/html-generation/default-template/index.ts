@@ -1,5 +1,7 @@
-import { CvContent } from '../../data.model';
+import { CvContent, Section } from '../../model';
 import header from './header';
+import sectionFactory from './sections';
+import { sectionStyles } from './sections/common-code';
 
 export default function generateCvHtml(content: CvContent): string {
     return `
@@ -57,6 +59,7 @@ export default function generateCvHtml(content: CvContent): string {
                         width: 2px;
                     }
                 </style>
+                ${sectionStyles()}
             </head>
             <body>
                 <base target="_blank" />
@@ -65,11 +68,11 @@ export default function generateCvHtml(content: CvContent): string {
                     ${header(content)}
                     <div class="content-wrapper">
                         <div class="left-wrapper">
-                            <h1>${content.name}</h1>
-                            <p>${content.country}</p>
-                            <br>
-                            <p>Click <a href="https://google.com">here</a> to get your CV.</p>
+                            <h1>Sections here</h1>
                             <div class="separator"></div>
+                            ${renderSections(content.sections)}
+                            <div class="separator"></div>
+                            <p>Click <a href="https://google.com">here</a> to get your CV.</p>
                             <p>Click <a href="https://google.com">here</a> to get your CV as a PDF.</p>
                         </div>
                         <div class="separator-vertical"></div>
@@ -91,4 +94,10 @@ export default function generateCvHtml(content: CvContent): string {
             </body>
         </html>
     `;
+}
+
+function renderSections(section: Array<Section>) {
+    return section.map(sectionFactory).join(`
+        <div class="separator"></div>
+    `);
 }
