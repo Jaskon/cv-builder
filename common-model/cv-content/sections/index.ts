@@ -9,4 +9,10 @@ export enum SectionType {
     projects = 'projects',
 }
 
+export interface SectionBase {
+    id: string;
+    type: SectionType;
+    title?: string;
+}
+
 export type Section = SectionEducation | SectionExperience;

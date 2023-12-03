@@ -1,12 +1,12 @@
-import { SectionType } from './index';
+import { SectionBase, SectionType } from './index';
 
-export interface SectionEducation {
+export interface SectionEducation extends SectionBase {
     type: SectionType.education;
-    title?: string;
     items: Array<SectionEducationItem>;
 }
 
 export interface SectionEducationItem {
+    id: string;
     title: string;
     institution: string;
     city: string;

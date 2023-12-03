@@ -13,9 +13,11 @@ export default function Home() {
         name: 'John Doe',
         country: 'United Kingdom',
         sections: [{
+            id: '1',
             type: SectionType.education,
             title: 'Education',
             items: [{
+                id: '1',
                 title: 'Computer Science',
                 institution: 'University of Oxford',
                 country: 'United Kingdom',
@@ -23,6 +25,7 @@ export default function Home() {
                 startDate: '2010',
                 endDate: '2014',
             }, {
+                id: '2',
                 title: 'Computer Science',
                 institution: 'University of Cambridge',
                 country: 'United Kingdom',
@@ -31,9 +34,11 @@ export default function Home() {
                 endDate: '2016',
             }]
         }, {
+            id: '2',
             type: SectionType.experience,
             title: 'Experience',
             items: [{
+                id: '1',
                 title: 'Frontend Developer',
                 company: 'Google',
                 startDate: '2014',
@@ -47,7 +52,7 @@ export default function Home() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="flex flex-row items-stretch w-full gap-2 p-4">
+            <div className="flex flex-row items-stretch gap-2 p-4 content w-fit">
                 <div className="grow-1">
                     <ControlsComponent
                         content={content}
