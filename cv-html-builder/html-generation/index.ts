@@ -1,4 +1,4 @@
-import { CvContent, Template } from '../model';
+import { CvContent, Template } from '../../common-model/cv-content';
 import defaultTemplate from './default-template';
 import alternativeTemplate from './alternative-template';
 

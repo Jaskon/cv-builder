@@ -1,4 +1,4 @@
-import { CvContent, Template } from '../cv-html-builder';
+import { CvContent, Template } from './cv-content';
 
 export interface IGeneratePdfApi {
     template: Template;

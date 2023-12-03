@@ -1,7 +1,8 @@
-import { CvContent, Section } from '../../model';
+import { CvContent } from '../../../common-model/cv-content';
 import header from './header';
 import sectionFactory from './sections';
 import { sectionStyles } from './sections/common-code';
+import { Section } from '../../../common-model/cv-content/sections';
 
 export default function generateCvHtml(content: CvContent): string {
     return `
@@ -74,17 +75,7 @@ export default function generateCvHtml(content: CvContent): string {
                         </div>
                         <div class="separator-vertical"></div>
                         <div class="right-wrapper">
-                            <div>Right panel</div>
-                            <div>Right panel content</div>
-                            <div><input type="checkbox"> Checkbox</div>
-                            <div><input type="checkbox" checked> Checkbox checked</div>
-                            <div>
-                                <ul>
-                                    <li>Item 1</li>
-                                    <li>Item 2</li>
-                                    <li>Item 3</li>
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

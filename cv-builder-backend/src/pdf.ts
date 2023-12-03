@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import generateCvHtml from '../../cv-html-builder/html-generation';
-import { CvContent, Template } from '../../cv-html-builder';
+import { CvContent, Template } from '../../common-model/cv-content';
 
 interface PdfGeneratorOptions {
     headless?: boolean | 'new';

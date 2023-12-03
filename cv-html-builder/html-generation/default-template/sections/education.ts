@@ -1,5 +1,5 @@
-import { SectionEducation } from '../../../model/sections';
-import { sectionHeader } from './common-code';
+import { sectionDate, sectionHeader } from './common-code';
+import { SectionEducation, SectionEducationItem } from '../../../../common-model/cv-content/sections/education';
 
 export default function sectionEducation(data: SectionEducation) {
     return `
@@ -10,13 +10,29 @@ export default function sectionEducation(data: SectionEducation) {
                 <div>
                     <div>${item.institution}</div>
                     <div>${item.title}</div>
-                    <div>${item.city}</div>
-                    <div>${item.country}</div>
-                    <div>${item.startDate} - ${item.endDate}</div>
+                    ${city(item)}
+                    ${country(item)}
+                    ${sectionDate(item)}
                 </div>
             `).join(`
                 <br/>
             `)}
         </div>
     `;
+}
+
+function city(item: SectionEducationItem) {
+    if (item.city) {
+        return `<div>${item.city}</div>`;
+    } else {
+        return '';
+    }
+}
+
+function country(item: SectionEducationItem) {
+    if (item.country) {
+        return `<div>${item.country}</div>`;
+    } else {
+        return '';
+    }
 }

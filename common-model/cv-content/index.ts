@@ -1,4 +1,4 @@
-import { SectionEducation, SectionExperience } from './sections';
+import { Section } from './sections';
 
 export interface CvContent {
     title: string;
@@ -7,8 +7,6 @@ export interface CvContent {
     photo?: string;
     sections: Section[];
 }
-
-export type Section = SectionEducation | SectionExperience;
 
 export enum Template {
     default = 'default',
