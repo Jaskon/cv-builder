@@ -1,4 +1,4 @@
-import { SectionEducation, SectionExperience } from './sections';
+import { SectionEducation, SectionExperience } from './sections/sections';
 
 export interface CvContent {
     title: string;

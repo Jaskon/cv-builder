@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { CvContent, Template } from '../../../cv-html-builder';
 import generateCvHtml from '../../../cv-html-builder/html-generation';
-import ControlsComponent from '@/app/controls';
+import ControlsComponent from '@/app/controls/index';
 import { generatePdfPost } from '@/app/api';
-import { SectionType } from '../../../cv-html-builder/model/sections';
+import { SectionType } from '../../../cv-html-builder/model/sections/sections';
 
 export default function Home() {
     const [content, setContent] = useState<CvContent>({

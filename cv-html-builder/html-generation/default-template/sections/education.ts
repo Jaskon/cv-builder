@@ -1,4 +1,4 @@
-import { SectionEducation } from '../../../model/sections';
+import { SectionEducation } from '../../../model/sections/sections';
 import { sectionHeader } from './common-code';
 
 export default function sectionEducation(data: SectionEducation) {
