@@ -1,7 +1,8 @@
-import { CvContent, Section } from '../../model';
+import { CvContent } from '../../../common-model/cv-content';
 import header from './header';
 import sectionFactory from './sections';
 import { sectionStyles } from './sections/common-code';
+import { Section } from '../../../common-model/cv-content/sections';
 
 export default function generateCvHtml(content: CvContent): string {
     return `

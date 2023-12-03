@@ -1,6 +1,6 @@
-import { Section } from '../../../model';
 import sectionEducation from './education';
 import sectionExperience from './experience';
+import { Section } from '../../../../common-model/cv-content/sections';
 
 export default function sectionFactory(data: Section) {
     switch (data.type) {

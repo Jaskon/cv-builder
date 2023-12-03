@@ -1,6 +1,6 @@
-import { CvContent, Section, Template } from '../../../../cv-html-builder';
 import EducationSection from '@/app/controls/education';
-import { SectionType } from '../../../../cv-html-builder/model/sections/sections';
+import { Section, SectionType } from '../../../../common-model/cv-content/sections';
+import { CvContent, Template } from '../../../../common-model/cv-content';
 
 interface Props {
     content: CvContent;

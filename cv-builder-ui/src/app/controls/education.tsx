@@ -1,4 +1,4 @@
-import { SectionEducationItem } from '../../../../cv-html-builder/model/sections/sections';
+import { SectionEducationItem } from '../../../../common-model/cv-content/sections/education';
 
 interface Props {
     data: Array<SectionEducationItem>;

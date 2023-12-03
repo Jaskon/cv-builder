@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { CvContent, Template } from '../../../cv-html-builder';
 import generateCvHtml from '../../../cv-html-builder/html-generation';
 import ControlsComponent from '@/app/controls/index';
 import { generatePdfPost } from '@/app/api';
-import { SectionType } from '../../../cv-html-builder/model/sections/sections';
+import { SectionType } from '../../../common-model/cv-content/sections';
+import { CvContent, Template } from '../../../common-model/cv-content';
 
 export default function Home() {
     const [content, setContent] = useState<CvContent>({

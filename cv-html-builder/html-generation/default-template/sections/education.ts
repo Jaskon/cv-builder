@@ -1,5 +1,5 @@
-import { SectionEducation } from '../../../model/sections/sections';
 import { sectionHeader } from './common-code';
+import { SectionEducation } from '../../../../common-model/cv-content/sections/education';
 
 export default function sectionEducation(data: SectionEducation) {
     return `
