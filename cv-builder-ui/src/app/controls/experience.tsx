@@ -47,7 +47,7 @@ export default function ExperienceSection({ section, setSection }: Props) {
         <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
                 <input type="checkbox" checked={section.enabled} onChange={e => updateSection({ enabled: e.target.checked })} />
-                <div className="text-lg font-bold">Experience</div>
+                <div className="text-lg font-bold">{section.title || 'Experience'}</div>
             </div>
             <div className="text-[30px] cursor-pointer mt-[-4px]" onClick={() => addItem()}>+</div>
         </div>

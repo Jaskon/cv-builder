@@ -25,7 +25,7 @@ export default function ControlsComponent({ className, content, setContent, temp
     return <div className={clsx('flex flex-col gap-2', className)}>
         <div>
             <label className="block">Template</label>
-            <select value={template} onChange={e => setTemplate(e.target.value as Template)}>
+            <select value={template} onChange={e => setTemplate(e.target.value as Template)} className="bg-white">
                 <option value={Template.default}>Default</option>
                 <option value={Template.alternative}>Alternative</option>
             </select>

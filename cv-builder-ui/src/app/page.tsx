@@ -84,8 +84,9 @@ export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between py-4">
             <div className="flex flex-row items-stretch gap-8 content w-fit">
-                <div className="grow-1">
+                <div className="grow-1 w-[300px]">
                     <ControlsComponent
+                        className="fixed w-[300px] overflow-y-auto top-0 h-full py-4"
                         content={content}
                         setContent={setContent}
                         template={template}
