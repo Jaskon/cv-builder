@@ -2,7 +2,7 @@ import { CvContent } from '../../../common-model/cv-content';
 import header from './header';
 import sectionFactory from './sections';
 import { sectionStyles } from './sections/common-code';
-import { Section } from '../../../common-model/cv-content/sections';
+import { Section, SectionPlacement } from '../../../common-model/cv-content/sections';
 
 export default function generateCvHtml(content: CvContent): string {
     return `
@@ -75,7 +75,7 @@ export default function generateCvHtml(content: CvContent): string {
                         </div>
                         <div class="separator-vertical"></div>
                         <div class="right-wrapper">
-                            
+                            ${renderSections(content.sections, SectionPlacement.right)}
                         </div>
                     </div>
                 </div>
@@ -84,8 +84,14 @@ export default function generateCvHtml(content: CvContent): string {
     `;
 }
 
-function renderSections(section: Array<Section>) {
-    return section.map(sectionFactory).join(`
-        <div class="separator"></div>
-    `);
+function renderSections(
+    section: Array<Section>,
+    placement: SectionPlacement = SectionPlacement.left
+) {
+    return section
+        .filter(one => one.enabled)
+        .filter(one => one.placement === placement)
+        .map(sectionFactory).join(`
+            <div class="separator"></div>
+        `);
 }

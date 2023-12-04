@@ -1,14 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
-import { SectionExperience, SectionExperienceItem } from '../../../../common-model/cv-content/sections/experience';
 import ButtonsPanel from './common/buttons-panel';
+import {
+    SectionSkills,
+    SectionSkillsItem,
+    SectionSkillsItemLevel
+} from '../../../../common-model/cv-content/sections/skills';
 
 interface Props {
-    section: SectionExperience;
-    setSection: (data: SectionExperience) => void;
+    section: SectionSkills;
+    setSection: (data: SectionSkills) => void;
 }
 
-export default function ExperienceSection({ section, setSection }: Props) {
-    const updateItem = (id: string, item: Partial<SectionExperienceItem>) => {
+export default function SkillsSection({ section, setSection }: Props) {
+    const updateItem = (id: string, item: Partial<SectionSkillsItem>) => {
         setSection({
             ...section,
             items: section.items.map(oldItem => oldItem.id === id ? { ...oldItem, ...item } : oldItem)
@@ -20,23 +24,20 @@ export default function ExperienceSection({ section, setSection }: Props) {
             ...section,
             items: [...section.items, {
                 id: uuidv4(),
-                title: '',
-                company: '',
-                startDate: '',
-                endDate: '',
-                description: '',
+                name: '',
+                level: 0,
             }]
         });
     }
 
-    const updateItems = (items: SectionExperienceItem[]) => {
+    const updateItems = (items: SectionSkillsItem[]) => {
         setSection({
             ...section,
             items
         });
     }
 
-    const updateSection = (patchSection: Partial<SectionExperience>) => {
+    const updateSection = (patchSection: Partial<SectionSkills>) => {
         setSection({
             ...section,
             ...patchSection
@@ -47,7 +48,7 @@ export default function ExperienceSection({ section, setSection }: Props) {
         <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
                 <input type="checkbox" checked={section.enabled} onChange={e => updateSection({ enabled: e.target.checked })} />
-                <div className="text-lg font-bold">Experience</div>
+                <div className="text-lg font-bold">Skills</div>
             </div>
             <div className="text-[30px] cursor-pointer mt-[-4px]" onClick={() => addItem()}>+</div>
         </div>
@@ -55,11 +56,14 @@ export default function ExperienceSection({ section, setSection }: Props) {
         <div className="flex flex-col gap-3">
             {section.items.map((item, index) =>
                 <div key={item.id} className="flex flex-col gap-1 border border-gray-300 rounded-lg p-4">
-                    <input value={item.title} placeholder="Title" onChange={e => updateItem(item.id, {title: e.target.value})}/>
-                    <input value={item.company} placeholder="Company" onChange={e => updateItem(item.id, {company: e.target.value})}/>
-                    <input value={item.startDate} placeholder="Start date" onChange={e => updateItem(item.id, {startDate: e.target.value})}/>
-                    <input value={item.endDate} placeholder="End date" onChange={e => updateItem(item.id, {endDate: e.target.value})}/>
-                    <textarea value={item.description} placeholder="Description" onChange={e => updateItem(item.id, {description: e.target.value})}/>
+                    <input value={item.name} placeholder="Name" onChange={e => updateItem(item.id, {name: e.target.value})}/>
+                    <input
+                        type="range"
+                        min={0}
+                        max={10}
+                        value={item.level}
+                        placeholder="Level"
+                        onChange={e => updateItem(item.id, {level: +e.target.value as SectionSkillsItemLevel})}/>
                     <ButtonsPanel items={section.items} updateItems={updateItems} index={index} />
                 </div>
             )}

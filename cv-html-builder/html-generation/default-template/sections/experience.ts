@@ -3,7 +3,7 @@ import { SectionExperience, SectionExperienceItem } from '../../../../common-mod
 
 export default function sectionExperience(data: SectionExperience) {
     return `
-        ${sectionHeader('Experience')}
+        ${sectionHeader(data.title || 'Experience')}
         
         <div>
             ${data.items.map(item => `
