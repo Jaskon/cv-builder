@@ -2,8 +2,11 @@ import EducationSection from '@/app/controls/education';
 import { Section, SectionType } from '../../../../common-model/cv-content/sections';
 import { CvContent, Template } from '../../../../common-model/cv-content';
 import ExperienceSection from '@/app/controls/experience';
+import clsx from 'clsx';
+import SkillsSection from '@/app/controls/skills';
 
 interface Props {
+    className?: string;
     content: CvContent;
     setContent: (data: CvContent) => void;
     template: Template;
@@ -11,7 +14,7 @@ interface Props {
     submit: () => void;
 }
 
-export default function ControlsComponent({ content, setContent, template, setTemplate, submit }: Props) {
+export default function ControlsComponent({ className, content, setContent, template, setTemplate, submit }: Props) {
     const updateSection = (id: string, section: Section) => {
         setContent({
             ...content,
@@ -19,7 +22,7 @@ export default function ControlsComponent({ content, setContent, template, setTe
         });
     };
 
-    return <div className="flex flex-col gap-2">
+    return <div className={clsx('flex flex-col gap-2', className)}>
         <div>
             <label className="block">Template</label>
             <select value={template} onChange={e => setTemplate(e.target.value as Template)}>
@@ -59,17 +62,19 @@ export default function ControlsComponent({ content, setContent, template, setTe
         <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF</button>
 
         <div className="flex flex-col gap-2">
-            {content.sections.map(section => SectionFabric(section, updateSection))}
+            {content.sections.map(section => SectionFactory(section, updateSection))}
         </div>
     </div>;
 }
 
-function SectionFabric(section: Section, setSection: (id: string, data: Section) => void) {
+function SectionFactory(section: Section, setSection: (id: string, data: Section) => void) {
     switch (section.type) {
         case SectionType.education:
             return <EducationSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)}/>;
         case SectionType.experience:
             return <ExperienceSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)} />
+        case SectionType.skills:
+            return <SkillsSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)} />;
         default:
             return <div>Unknown section</div>;
     }
