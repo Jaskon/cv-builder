@@ -4,7 +4,7 @@ interface Props {
     index: number;
 }
 
-export default function ButtonsPanel({ items, updateItems, index }: Props) {
+export default function ItemButtonsPanel({ items, updateItems, index }: Props) {
     const removeItem = (index: number) => {
         const newItems = [...items.slice(0, index), ...items.slice(index + 1)];
         updateItems(newItems);

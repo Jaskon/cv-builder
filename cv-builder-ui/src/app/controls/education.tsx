@@ -1,13 +1,18 @@
 import { SectionEducation, SectionEducationItem } from '../../../../common-model/cv-content/sections/education';
 import { v4 as uuidv4 } from 'uuid';
-import ButtonsPanel from '@/app/controls/common/buttons-panel';
+import ItemButtonsPanel from '@/app/controls/common/item-buttons-panel';
+import SectionButtonsPanel from '@/app/controls/common/section-buttons-panel';
 
 interface Props {
     section: SectionEducation;
     setSection: (data: SectionEducation) => void;
+    moveUp: () => void;
+    moveDown: () => void;
+    isFirst: boolean;
+    isLast: boolean;
 }
 
-export default function EducationSection({ section, setSection }: Props) {
+export default function EducationSection({ section, setSection, moveUp, moveDown, isFirst, isLast }: Props) {
     const updateItem = (id: string, item: Partial<SectionEducationItem>) => {
         setSection({
             ...section,
@@ -50,7 +55,7 @@ export default function EducationSection({ section, setSection }: Props) {
                 <input type="checkbox" checked={section.enabled} onChange={e => updateSection({ enabled: e.target.checked })} />
                 <div className="text-lg font-bold">{section.title || 'Education'}</div>
             </div>
-            <div className="text-[30px] cursor-pointer mt-[-4px]" onClick={() => addItem()}>+</div>
+            <SectionButtonsPanel addItem={addItem} section={section} setSection={setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />
         </div>
 
         <div className="flex flex-col gap-4">
@@ -62,7 +67,7 @@ export default function EducationSection({ section, setSection }: Props) {
                     <input value={item.city} placeholder="City" onChange={e => updateItem(item.id, {city: e.target.value})}/>
                     <input value={item.startDate} placeholder="Start date" onChange={e => updateItem(item.id, {startDate: e.target.value})}/>
                     <input value={item.endDate} placeholder="End date" onChange={e => updateItem(item.id, {endDate: e.target.value})}/>
-                    <ButtonsPanel items={section.items} updateItems={updateItems} index={index} />
+                    <ItemButtonsPanel items={section.items} updateItems={updateItems} index={index} />
                 </div>
             )}
         </div>
