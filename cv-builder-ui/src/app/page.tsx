@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import generateCvHtml from '../../../cv-html-builder/html-generation';
 import ControlsComponent from '@/app/controls/index';
 import { generatePdfPost } from '@/app/api';
@@ -9,7 +9,9 @@ import { CvContent, Template } from '../../../common-model/cv-content';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
-    const [content, setContent] = useState<CvContent>({
+    const [_, startTransition] = useTransition();
+
+    const [content, _setContent] = useState<CvContent>({
         title: 'Frontend Developer',
         name: 'John Doe',
         country: 'United Kingdom',
@@ -79,6 +81,12 @@ export default function Home() {
         }]
     });
 
+    const setContent = (content: CvContent) => {
+        startTransition(() => {
+            _setContent(content);
+        });
+    }
+
     const [template, setTemplate] = useState<Template>(Template.default);
 
     return (
@@ -98,6 +106,7 @@ export default function Home() {
                 <div className="bg-gray-300 w-0.5 my-4"></div>
 
                 <div className="border-black border box-content p-5 w-[795px] h-[1124px]">
+
                     <iframe
                         className="w-full h-full"
                         srcDoc={generateCvHtml(content, template)}

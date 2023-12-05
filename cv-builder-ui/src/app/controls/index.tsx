@@ -59,7 +59,7 @@ export default function ControlsComponent({ className, content, setContent, temp
             <input value={content.country} onChange={e => setContent({ ...content, country: e.target.value })} />
         </div>
 
-        <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF</button>
+        <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF (into backend folder)</button>
 
         <div className="flex flex-col gap-2">
             {content.sections.map(section => SectionFactory(section, updateSection))}
