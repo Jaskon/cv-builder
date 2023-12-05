@@ -77,17 +77,32 @@ export default function ControlsComponent({ className, content, setContent, temp
 
         <div>
             <label className="block">Title</label>
-            <input value={content.title} onChange={e => setContent({ ...content, title: e.target.value })} />
+            <input value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
         </div>
 
         <div>
             <label className="block">Name</label>
-            <input value={content.name} onChange={e => setContent({ ...content, name: e.target.value })} />
+            <input value={content.name || ''} onChange={e => setContent({ ...content, name: e.target.value })} />
         </div>
 
         <div>
             <label className="block">Country</label>
-            <input value={content.country} onChange={e => setContent({ ...content, country: e.target.value })} />
+            <input value={content.country || ''} onChange={e => setContent({ ...content, country: e.target.value })} />
+        </div>
+
+        <div>
+            <label className="block">City</label>
+            <input value={content.city || ''} onChange={e => setContent({ ...content, city: e.target.value })} />
+        </div>
+
+        <div>
+            <label className="block">Email</label>
+            <input value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
+        </div>
+
+        <div>
+            <label className="block">Phone</label>
+            <input value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
         </div>
 
         <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF (into backend folder)</button>

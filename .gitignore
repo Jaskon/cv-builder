@@ -28,3 +28,4 @@ next-env.d.ts
 
 # other
 exported.pdf
+cv-builder-ui/src/test-data-personal.ts

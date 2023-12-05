@@ -85,10 +85,10 @@ export default function generateCvHtml(content: CvContent): string {
 }
 
 function renderSections(
-    section: Array<Section>,
+    sections: Array<Section>,
     placement: SectionPlacement = SectionPlacement.left
 ) {
-    return section
+    return sections
         .filter(one => one.enabled)
         .filter(one => one.placement === placement)
         .map(sectionFactory).join(`
