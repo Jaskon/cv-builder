@@ -1,13 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
 import { SectionExperience, SectionExperienceItem } from '../../../../common-model/cv-content/sections/experience';
-import ButtonsPanel from './common/buttons-panel';
+import ItemButtonsPanel from './common/item-buttons-panel';
+import SectionButtonsPanel from '@/app/controls/common/section-buttons-panel';
 
 interface Props {
     section: SectionExperience;
     setSection: (data: SectionExperience) => void;
+    moveUp: () => void;
+    moveDown: () => void;
+    isFirst: boolean;
+    isLast: boolean;
 }
 
-export default function ExperienceSection({ section, setSection }: Props) {
+export default function ExperienceSection({ section, setSection, moveUp, moveDown, isFirst, isLast }: Props) {
     const updateItem = (id: string, item: Partial<SectionExperienceItem>) => {
         setSection({
             ...section,
@@ -47,9 +52,9 @@ export default function ExperienceSection({ section, setSection }: Props) {
         <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
                 <input type="checkbox" checked={section.enabled} onChange={e => updateSection({ enabled: e.target.checked })} />
-                <div className="text-lg font-bold">Experience</div>
+                <div className="text-lg font-bold">{section.title || 'Experience'}</div>
             </div>
-            <div className="text-[30px] cursor-pointer mt-[-4px]" onClick={() => addItem()}>+</div>
+            <SectionButtonsPanel addItem={addItem} section={section} setSection={setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />
         </div>
 
         <div className="flex flex-col gap-3">
@@ -60,7 +65,7 @@ export default function ExperienceSection({ section, setSection }: Props) {
                     <input value={item.startDate} placeholder="Start date" onChange={e => updateItem(item.id, {startDate: e.target.value})}/>
                     <input value={item.endDate} placeholder="End date" onChange={e => updateItem(item.id, {endDate: e.target.value})}/>
                     <textarea value={item.description} placeholder="Description" onChange={e => updateItem(item.id, {description: e.target.value})}/>
-                    <ButtonsPanel items={section.items} updateItems={updateItems} index={index} />
+                    <ItemButtonsPanel items={section.items} updateItems={updateItems} index={index} />
                 </div>
             )}
         </div>

@@ -22,10 +22,41 @@ export default function ControlsComponent({ className, content, setContent, temp
         });
     };
 
+    const updateSections = (sections: Section[]) => {
+        setContent({
+            ...content,
+            sections
+        });
+    }
+
+    const moveSectionUp = (index: number) => {
+        if (index === 0) return;
+
+        const newSections = [
+            ...content.sections.slice(0, index - 1),
+            content.sections[index],
+            content.sections[index - 1],
+            ...content.sections.slice(index + 1)
+        ];
+        updateSections(newSections);
+    }
+
+    const moveSectionDown = (index: number) => {
+        if (index === content.sections.length - 1) return;
+
+        const newSections = [
+            ...content.sections.slice(0, index),
+            content.sections[index + 1],
+            content.sections[index],
+            ...content.sections.slice(index + 2)
+        ];
+        updateSections(newSections);
+    }
+
     return <div className={clsx('flex flex-col gap-2', className)}>
         <div>
             <label className="block">Template</label>
-            <select value={template} onChange={e => setTemplate(e.target.value as Template)}>
+            <select value={template} onChange={e => setTemplate(e.target.value as Template)} className="bg-white">
                 <option value={Template.default}>Default</option>
                 <option value={Template.alternative}>Alternative</option>
             </select>
@@ -59,22 +90,34 @@ export default function ControlsComponent({ className, content, setContent, temp
             <input value={content.country} onChange={e => setContent({ ...content, country: e.target.value })} />
         </div>
 
-        <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF</button>
+        <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF (into backend folder)</button>
 
         <div className="flex flex-col gap-2">
-            {content.sections.map(section => SectionFactory(section, updateSection))}
+            {content.sections.map(
+                (section, index) =>
+                    SectionFactory(
+                        section,
+                        updateSection,
+                        () => moveSectionUp(index),
+                        () => moveSectionDown(index),
+                        index === 0,
+                        index === content.sections.length - 1
+                    )
+            )}
         </div>
     </div>;
 }
 
-function SectionFactory(section: Section, setSection: (id: string, data: Section) => void) {
+function SectionFactory(section: Section, setSection: (id: string, data: Section) => void, moveUp: () => void, moveDown: () => void, isFirst: boolean, isLast: boolean) {
+    const _setSection = (data: Section) => setSection(section.id, data);
+
     switch (section.type) {
         case SectionType.education:
-            return <EducationSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)}/>;
+            return <EducationSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         case SectionType.experience:
-            return <ExperienceSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)} />
+            return <ExperienceSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         case SectionType.skills:
-            return <SkillsSection key={section.id} section={section} setSection={(data) => setSection(section.id, data)} />;
+            return <SkillsSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         default:
             return <div>Unknown section</div>;
     }
