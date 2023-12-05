@@ -38,8 +38,5 @@ export function validateData(content: CvContent): string[] {
     if (!content?.name) {
         errors.push('content.name is required');
     }
-    if (!content?.country) {
-        errors.push('content.country is required');
-    }
     return errors;
 }
