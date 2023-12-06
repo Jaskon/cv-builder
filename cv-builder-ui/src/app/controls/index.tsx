@@ -4,6 +4,7 @@ import { CvContent, Template } from '../../../../common-model/cv-content';
 import ExperienceSection from '@/app/controls/experience';
 import clsx from 'clsx';
 import SkillsSection from '@/app/controls/skills';
+import ProfileSection from '@/app/controls/profile';
 
 interface Props {
     className?: string;
@@ -126,14 +127,25 @@ export default function ControlsComponent({ className, content, setContent, temp
 function SectionFactory(section: Section, setSection: (id: string, data: Section) => void, moveUp: () => void, moveDown: () => void, isFirst: boolean, isLast: boolean) {
     const _setSection = (data: Section) => setSection(section._id, data);
 
+    const commonProps = {
+        setSection: _setSection,
+        moveUp,
+        moveDown,
+        isFirst,
+        isLast
+    }
+
     switch (section._type) {
         case SectionType.education:
-            return <EducationSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <EducationSection key={section._id} section={section} {...commonProps} />;
         case SectionType.experience:
-            return <ExperienceSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <ExperienceSection key={section._id} section={section} {...commonProps} />;
         case SectionType.skills:
-            return <SkillsSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <SkillsSection key={section._id} section={section} {...commonProps} />;
+        case SectionType.profile:
+            return <ProfileSection key={section._id} section={section} {...commonProps} />;
         default:
-            return <div>Unknown section</div>;
+            // @ts-ignore
+            return <div key={section?._id}>Unknown section</div>;
     }
 }

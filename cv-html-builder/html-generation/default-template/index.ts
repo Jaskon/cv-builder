@@ -19,7 +19,7 @@ export default function generateCvHtml(content: CvContent): string {
                         background-color: #fdfdfd;
                         font-family: sans-serif;
                         font-size: 12pt;
-                        text-align: center;
+                        text-align: left;
                         -webkit-print-color-adjust: exact;
                     }
                     .separator {
@@ -37,6 +37,7 @@ export default function generateCvHtml(content: CvContent): string {
                         align-items: stretch;
                         display: flex;
                         flex-direction: row;
+                        gap: 20px;
                         padding: 30px;
                         width: 100%;
                     }
@@ -44,16 +45,16 @@ export default function generateCvHtml(content: CvContent): string {
                         align-items: center;
                         display: flex;
                         flex-direction: column;
+                        flex-grow: 1;
                         font-size: 10pt;
-                        padding: 0 10px 0 0;
-                        width: 60%;
+                        padding: 0 0 0 0;
                     }
                     .right-wrapper {
                         align-items: center;
                         display: flex;
                         flex-direction: column;
                         padding: 0 0 0 10px;
-                        width: 40%;
+                        width: 1070px;
                     }
                     .separator-vertical {
                         background-color: #eaeaea;
@@ -69,8 +70,6 @@ export default function generateCvHtml(content: CvContent): string {
                     ${header(content)}
                     <div class="content-wrapper">
                         <div class="left-wrapper">
-                            <h1>Sections here</h1>
-                            <div class="separator"></div>
                             ${renderSections(content.sections)}
                         </div>
                         <div class="separator-vertical"></div>

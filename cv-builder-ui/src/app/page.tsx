@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import generateCvHtml from '../../../cv-html-builder/html-generation';
 import ControlsComponent from '@/app/controls/index';
 import { generatePdfPost } from '@/app/api';
@@ -8,6 +8,11 @@ import { CvContent, Template } from '../../../common-model/cv-content';
 import testData from '../test-data';
 
 export default function Home() {
+    // For fast reloading of test data
+    useEffect(() => {
+        _setContent(testData);
+    }, [testData]);
+
     const [_, startTransition] = useTransition();
 
     const [content, _setContent] = useState<CvContent>(testData);

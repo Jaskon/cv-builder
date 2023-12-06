@@ -1,7 +1,7 @@
 import { SectionPlacement } from '../../../../../common-model/cv-content/sections';
 
 interface Props {
-    addItem: () => void;
+    addItem?: () => void;
     moveUp: () => void;
     moveDown: () => void;
     section: any;
@@ -37,7 +37,9 @@ export default function SectionButtonsPanel({ addItem, moveUp, moveDown, section
                 {!isLast && <button className="border border-black rounded-md px-1" onClick={() => moveDown()}>&darr;</button>}
             </div>
 
-            <div className="text-[30px] cursor-pointer mt-[-4px] px-1" onClick={() => addItem()}>+</div>
+            {addItem &&
+                <div className="text-[30px] cursor-pointer mt-[-4px] px-1" onClick={() => addItem()}>+</div>
+            }
         </div>
     );
 }
