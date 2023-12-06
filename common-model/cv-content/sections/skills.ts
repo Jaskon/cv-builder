@@ -1,12 +1,12 @@
 import { SectionBase, SectionType } from './index';
 
 export interface SectionSkills extends SectionBase {
-    type: SectionType.skills;
+    _type: SectionType.skills;
     items: Array<SectionSkillsItem>;
 }
 
 export interface SectionSkillsItem {
-    id: string;
+    _id: string;
     name: string;
     level: SectionSkillsItemLevel;
 }

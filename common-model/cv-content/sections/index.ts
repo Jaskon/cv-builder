@@ -1,11 +1,13 @@
 import { SectionExperience } from './experience';
 import { SectionEducation } from './education';
 import { SectionSkills } from './skills';
+import { SectionProfile } from './profile';
 
 export enum SectionType {
     education = 'education',
     experience = 'experience',
     skills = 'skills',
+    profile = 'profile',
     languages = 'languages',
     projects = 'projects',
 }
@@ -16,11 +18,11 @@ export enum SectionPlacement {
 }
 
 export interface SectionBase {
-    id: string;
-    type: SectionType;
-    title?: string;
-    enabled?: boolean;
-    placement?: SectionPlacement;
+    _id: string;
+    _type: SectionType;
+    _title?: string;
+    _enabled?: boolean;
+    _placement?: SectionPlacement;
 }
 
-export type Section = SectionEducation | SectionExperience | SectionSkills;
+export type Section = SectionEducation | SectionExperience | SectionSkills | SectionProfile;

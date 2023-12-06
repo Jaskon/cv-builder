@@ -3,13 +3,13 @@ import { SectionEducation, SectionEducationItem } from '../../../../common-model
 
 export default function sectionEducation(data: SectionEducation) {
     return `
-        ${sectionHeader(data.title || 'Education')}
+        ${sectionHeader(data._title || 'Education')}
         
         <div>
             ${data.items.map(item => `
                 <div>
                     <div>${item.institution}</div>
-                    <div>${item.title}</div>
+                    <div>${item._title}</div>
                     ${city(item)}
                     ${country(item)}
                     ${sectionDate(item)}

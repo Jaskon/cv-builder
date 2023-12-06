@@ -17,7 +17,7 @@ export default function sectionSkills(data: SectionSkills) {
                 gap: 20px;
             }
         </style>
-        ${sectionHeader(data.title || 'Skills')}
+        ${sectionHeader(data._title || 'Skills')}
         
         <div>
             ${data.items.map(item => `

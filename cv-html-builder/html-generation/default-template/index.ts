@@ -89,8 +89,8 @@ function renderSections(
     placement: SectionPlacement = SectionPlacement.left
 ) {
     return sections
-        .filter(one => one.enabled)
-        .filter(one => one.placement === placement)
+        .filter(one => one._enabled)
+        .filter(one => one._placement === placement)
         .map(sectionFactory).join(`
             <div class="separator"></div>
         `);

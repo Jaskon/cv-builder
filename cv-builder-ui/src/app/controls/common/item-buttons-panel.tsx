@@ -1,5 +1,5 @@
 interface Props {
-    items: { id: string }[];
+    items: { _id: string }[];
     updateItems: (data: any[]) => void;
     index: number;
 }

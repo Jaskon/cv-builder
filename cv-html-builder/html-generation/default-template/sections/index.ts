@@ -4,7 +4,7 @@ import { Section } from '../../../../common-model/cv-content/sections';
 import sectionSkills from './skills';
 
 export default function sectionFactory(data: Section) {
-    switch (data.type) {
+    switch (data._type) {
         case 'education':
             return sectionEducation(data);
 
@@ -15,6 +15,6 @@ export default function sectionFactory(data: Section) {
             return sectionSkills(data);
 
         default:
-            throw new Error(`Unknown section type: ${data.type}`);
+            throw new Error(`Unknown section type: ${data._type}`);
     }
 }

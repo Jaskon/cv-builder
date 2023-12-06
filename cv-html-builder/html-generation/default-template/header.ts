@@ -11,7 +11,6 @@ export default function header(content: CvContent) {
                 width: 100%;
             }
             .header-photo {
-                border-right: 1px solid darkgray;
                 height: 100%;
                 width: auto;
             }

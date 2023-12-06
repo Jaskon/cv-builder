@@ -1,13 +1,13 @@
 import { SectionBase, SectionType } from './index';
 
 export interface SectionExperience extends SectionBase {
-    type: SectionType.experience;
+    _type: SectionType.experience;
     items: Array<SectionExperienceItem>;
 }
 
 export interface SectionExperienceItem {
-    id: string;
-    title: string;
+    _id: string;
+    _title: string;
     company: string;
     startDate?: string;
     endDate?: string;

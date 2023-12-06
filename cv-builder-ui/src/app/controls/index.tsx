@@ -18,7 +18,7 @@ export default function ControlsComponent({ className, content, setContent, temp
     const updateSection = (id: string, section: Section) => {
         setContent({
             ...content,
-            sections: content.sections.map(oldSection => oldSection.id === id ? section : oldSection)
+            sections: content.sections.map(oldSection => oldSection._id === id ? section : oldSection)
         });
     };
 
@@ -124,15 +124,15 @@ export default function ControlsComponent({ className, content, setContent, temp
 }
 
 function SectionFactory(section: Section, setSection: (id: string, data: Section) => void, moveUp: () => void, moveDown: () => void, isFirst: boolean, isLast: boolean) {
-    const _setSection = (data: Section) => setSection(section.id, data);
+    const _setSection = (data: Section) => setSection(section._id, data);
 
-    switch (section.type) {
+    switch (section._type) {
         case SectionType.education:
-            return <EducationSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <EducationSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         case SectionType.experience:
-            return <ExperienceSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <ExperienceSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         case SectionType.skills:
-            return <SkillsSection key={section.id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
+            return <SkillsSection key={section._id} section={section} setSection={_setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />;
         default:
             return <div>Unknown section</div>;
     }
