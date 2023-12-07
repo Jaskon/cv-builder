@@ -17,18 +17,21 @@ export default function sectionSkills(data: SectionSkills) {
                 gap: 20px;
             }
         </style>
-        ${sectionHeader(data._title || 'Skills')}
         
-        <div>
-            ${data.items.map(item => `
-                <div class="section-skills-item">
-                    <div>${item.name}</div>
-                    <div class="section-skills-item-space-and-level">
-                        <div> - - - </div>
-                        <div>${item.level}</div>
+        <div class="section-wrapper">
+            ${sectionHeader(data._title || 'Skills')}
+            
+            <div>
+                ${data.items.map(item => `
+                    <div class="section-skills-item">
+                        <div>${item.name}</div>
+                        <div class="section-skills-item-space-and-level">
+                            <div> - - - </div>
+                            <div>${item.level}</div>
+                        </div>
                     </div>
-                </div>
-            `).join(``)}
+                `).join(``)}
+            </div>
         </div>
     `;
 }

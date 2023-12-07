@@ -3,20 +3,22 @@ import { SectionEducation, SectionEducationItem } from '../../../../common-model
 
 export default function sectionEducation(data: SectionEducation) {
     return `
-        ${sectionHeader(data._title || 'Education')}
-        
-        <div>
-            ${data.items.map(item => `
-                <div>
-                    <div>${item.institution}</div>
-                    <div>${item._title}</div>
-                    ${city(item)}
-                    ${country(item)}
-                    ${sectionDate(item)}
-                </div>
-            `).join(`
-                <br/>
-            `)}
+        <div class="section-wrapper">
+            ${sectionHeader(data._title || 'Education')}
+            
+            <div>
+                ${data.items.map(item => `
+                    <div>
+                        <div>${item.institution}</div>
+                        <div>${item._title}</div>
+                        ${city(item)}
+                        ${country(item)}
+                        ${sectionDate(item)}
+                    </div>
+                `).join(`
+                    <br/>
+                `)}
+            </div>
         </div>
     `;
 }

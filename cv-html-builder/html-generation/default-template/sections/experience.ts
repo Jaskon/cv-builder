@@ -3,19 +3,21 @@ import { SectionExperience, SectionExperienceItem } from '../../../../common-mod
 
 export default function sectionExperience(data: SectionExperience) {
     return `
-        ${sectionHeader(data._title || 'Experience')}
-        
-        <div>
-            ${data.items.map(item => `
-                <div>
-                    <div>${item.company}</div>
-                    <div>${item._title}</div>
-                    ${sectionDate(item)}
-                    ${description(item)}
-                </div>
-            `).join(`
-                <br/>
-            `)}
+        <div class="section-wrapper">
+            ${sectionHeader(data._title || 'Experience')}
+            
+            <div>
+                ${data.items.map(item => `
+                    <div>
+                        <div>${item.company}</div>
+                        <div>${item._title}</div>
+                        ${sectionDate(item)}
+                        ${description(item)}
+                    </div>
+                `).join(`
+                    <br/>
+                `)}
+            </div>
         </div>
     `;
 }

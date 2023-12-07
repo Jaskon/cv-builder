@@ -3,10 +3,12 @@ import { SectionProfile } from '../../../../common-model/cv-content/sections/pro
 
 export default function sectionProfile(data: SectionProfile) {
     return `
-        ${sectionHeader(data._title || 'Experience')}
-        
-        <div>
-            ${data.text}
+        <div class="section-wrapper">
+            ${sectionHeader(data._title || 'Experience')}
+            
+            <div>
+                ${data.text}
+            </div>
         </div>
     `;
 }

@@ -1,13 +1,14 @@
 export function sectionStyles() {
     return `
         <style>
-            .section-header {
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-            
+            .section-header { }
             .section-header-title {
                 font-size: 14pt;
+            }
+            .section-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
             }
         </style>
     `;

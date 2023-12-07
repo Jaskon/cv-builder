@@ -1,3 +1,5 @@
+// noinspection CssUnresolvedCustomProperty
+
 import { CvContent } from '../../../common-model/cv-content';
 import header from './header';
 import sectionFactory from './sections';
@@ -10,6 +12,10 @@ export default function generateCvHtml(content: CvContent): string {
             <head>
                 <title>${content.title}</title>
                 <style>
+                    :root {
+                        --content-wrapper-padding: 34px;
+                    }
+                
                     * {
                         box-sizing: border-box;
                         margin: 0;
@@ -19,13 +25,15 @@ export default function generateCvHtml(content: CvContent): string {
                         background-color: #fdfdfd;
                         font-family: sans-serif;
                         font-size: 12pt;
+                        line-height: 1.23;
                         text-align: left;
                         -webkit-print-color-adjust: exact;
                     }
                     .separator {
                         background-color: #eaeaea;
+                        border-radius: 2px;
                         height: 2px;
-                        margin: 30px 0;
+                        margin: 16px 0 20px 0;
                         width: 100%;
                     }
                     .global-wrapper {
@@ -37,28 +45,27 @@ export default function generateCvHtml(content: CvContent): string {
                         align-items: stretch;
                         display: flex;
                         flex-direction: row;
-                        gap: 20px;
-                        padding: 30px;
+                        font-size: 10pt;
+                        gap: 32px;
+                        padding: var(--content-wrapper-padding);
                         width: 100%;
                     }
-                    .left-wrapper {
+                    .any-side-wrapper {
                         align-items: start;
                         display: flex;
                         flex-direction: column;
-                        flex-grow: 1;
-                        font-size: 10pt;
-                        padding: 0 0 0 0;
                     }
-                    .right-wrapper {
-                        align-items: start;
-                        display: flex;
-                        flex-direction: column;
+                    .left-side-wrapper {
+                        flex-grow: 1;
+                    }
+                    .right-side-wrapper {
                         flex-shrink: 0;
-                        padding: 0 0 0 10px;
-                        width: 30%;
+                        width: calc(29.4% - calc(var(--content-wrapper-padding) / 2.5));
                     }
                     .separator-vertical {
                         background-color: #eaeaea;
+                        border-radius: 2px;
+                        flex-shrink: 0;
                         width: 2px;
                     }
                 </style>
@@ -70,11 +77,11 @@ export default function generateCvHtml(content: CvContent): string {
                 <div class="global-wrapper">
                     ${header(content)}
                     <div class="content-wrapper">
-                        <div class="left-wrapper">
+                        <div class="left-side-wrapper any-side-wrapper">
                             ${renderSections(content.sections)}
                         </div>
                         <div class="separator-vertical"></div>
-                        <div class="right-wrapper">
+                        <div class="right-side-wrapper any-side-wrapper">
                             ${renderSections(content.sections, SectionPlacement.right)}
                         </div>
                     </div>
