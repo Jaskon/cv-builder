@@ -9,11 +9,13 @@ export default function sectionEducation(data: SectionEducation) {
             <div>
                 ${data.items.map(item => `
                     <div>
-                        <div>${item.institution}</div>
+                        <div class="section-with-date-header">
+                            <div>${item.institution}</div>
+                            ${sectionDate(item)}
+                        </div>
                         <div>${item._title}</div>
                         ${city(item)}
                         ${country(item)}
-                        ${sectionDate(item)}
                     </div>
                 `).join(`
                     <br/>

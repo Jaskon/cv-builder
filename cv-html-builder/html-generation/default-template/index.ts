@@ -3,8 +3,8 @@
 import { CvContent } from '../../../common-model/cv-content';
 import header from './header';
 import sectionFactory from './sections';
-import { sectionStyles } from './sections/common-code';
 import { Section, SectionPlacement } from '../../../common-model/cv-content/sections';
+import { sectionStyles } from './sections/common-styles';
 
 export default function generateCvHtml(content: CvContent): string {
     return `

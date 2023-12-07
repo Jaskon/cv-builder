@@ -76,9 +76,9 @@ try {
             _placement: SectionPlacement.right,
             _title: 'Skills',
             items: [
-                { _id: uuidv4(), name: 'JavaScript', level: 9 },
-                { _id: uuidv4(), name: 'TypeScript', level: 9 },
-                { _id: uuidv4(), name: 'Python', level: 8 },
+                { _id: uuidv4(), name: 'JavaScript', level: 10 },
+                { _id: uuidv4(), name: 'React.js', level: 9 },
+                { _id: uuidv4(), name: 'Python', level: 6 },
                 { _id: uuidv4(), name: 'Java', level: 3 },
             ]
         }]

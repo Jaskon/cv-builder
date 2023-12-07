@@ -9,9 +9,11 @@ export default function sectionExperience(data: SectionExperience) {
             <div>
                 ${data.items.map(item => `
                     <div>
-                        <div>${item.company}</div>
+                        <div class="section-with-date-header">
+                            <div>${item.company}</div>
+                            ${sectionDate(item)}
+                        </div>
                         <div>${item._title}</div>
-                        ${sectionDate(item)}
                         ${description(item)}
                     </div>
                 `).join(`

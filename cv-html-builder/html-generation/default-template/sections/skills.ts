@@ -6,28 +6,38 @@ export default function sectionSkills(data: SectionSkills) {
         <style>
             .section-skills-item {
                 display: flex;
-                flex-direction: row;
-                gap: 20px;
-                justify-content: space-between;
+                flex-direction: column;
+                gap: 4px;
             }
             
-            .section-skills-item-space-and-level {
+            .section-skills-item-wrapper {
                 display: flex;
-                flex-direction: row;
-                gap: 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section-skills-item-level {
+                background-color: #ccc;
+                height: 9px;
+                border-radius: 5px;
+                width: 100%;
+            }
+            .section-skills-item-level-filled {
+                background-color: #333;
+                height: 100%;
+                border-radius: 5px;
             }
         </style>
         
         <div class="section-wrapper">
             ${sectionHeader(data._title || 'Skills')}
             
-            <div>
+            <div class="section-skills-item-wrapper">
                 ${data.items.map(item => `
                     <div class="section-skills-item">
                         <div>${item.name}</div>
-                        <div class="section-skills-item-space-and-level">
-                            <div> - - - </div>
-                            <div>${item.level}</div>
+                        <div class="section-skills-item-level">
+                            <div class="section-skills-item-level-filled" style="width: ${item.level * 10}%"></div>
                         </div>
                     </div>
                 `).join(``)}
