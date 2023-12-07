@@ -25,7 +25,7 @@ export default function generateCvHtml(content: CvContent): string {
                     .separator {
                         background-color: #eaeaea;
                         height: 2px;
-                        margin: 30px;
+                        margin: 30px 0;
                         width: 100%;
                     }
                     .global-wrapper {
@@ -42,7 +42,7 @@ export default function generateCvHtml(content: CvContent): string {
                         width: 100%;
                     }
                     .left-wrapper {
-                        align-items: center;
+                        align-items: start;
                         display: flex;
                         flex-direction: column;
                         flex-grow: 1;
@@ -50,11 +50,12 @@ export default function generateCvHtml(content: CvContent): string {
                         padding: 0 0 0 0;
                     }
                     .right-wrapper {
-                        align-items: center;
+                        align-items: start;
                         display: flex;
                         flex-direction: column;
+                        flex-shrink: 0;
                         padding: 0 0 0 10px;
-                        width: 1070px;
+                        width: 30%;
                     }
                     .separator-vertical {
                         background-color: #eaeaea;
