@@ -7,7 +7,7 @@ export interface SectionExperience extends SectionBase {
 
 export interface SectionExperienceItem {
     _id: string;
-    _title: string;
+    title: string;
     company: string;
     startDate?: string;
     endDate?: string;

@@ -10,7 +10,7 @@ try {
     cvContent = {
         title: 'Frontend Developer',
         name: 'John Doe',
-        country: 'United Kingdom',
+        location: 'United Kingdom',
         sections: [{
             _id: uuidv4(),
             _type: SectionType.profile,
@@ -26,7 +26,7 @@ try {
             _title: 'Education',
             items: [{
                 _id: uuidv4(),
-                _title: 'Computer Science111221',
+                title: 'Computer Science111221',
                 institution: 'University of Oxford',
                 country: 'United Kingdom',
                 city: 'Oxford',
@@ -34,7 +34,7 @@ try {
                 endDate: '2014',
             }, {
                 _id: uuidv4(),
-                _title: 'Computer Science',
+                title: 'Computer Science',
                 institution: 'University of Cambridge',
                 country: 'United Kingdom',
                 city: 'Cambridge',
@@ -49,7 +49,7 @@ try {
             _title: 'Experience',
             items: [{
                 _id: '1',
-                _title: 'Frontend Developer',
+                title: 'Frontend Developer',
                 company: 'Google',
                 startDate: '2014',
                 endDate: '2016',
@@ -63,7 +63,7 @@ try {
             _title: 'Experience 2',
             items: [{
                 _id: '1',
-                _title: 'Frontend Developer',
+                title: 'Frontend Developer',
                 company: 'Google',
                 startDate: '2014',
                 endDate: '2016',

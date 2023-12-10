@@ -6,7 +6,7 @@ export default function sectionProfile(data: SectionProfile) {
         <div class="section-wrapper">
             ${sectionHeader(data._title || 'Experience')}
             
-            <div>
+            <div style="word-break: break-word">
                 ${data.text}
             </div>
         </div>

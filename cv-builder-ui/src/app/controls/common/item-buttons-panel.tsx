@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+
 interface Props {
     items: { _id: string }[];
     updateItems: (data: any[]) => void;
@@ -35,10 +37,10 @@ export default function ItemButtonsPanel({ items, updateItems, index }: Props) {
     }
 
     return (
-        <div className="flex flex-row">
-            <button className="grow border border-black rounded-md" onClick={() => removeItem(index)}>Remove</button>
-            {index !== 0 && <button className="border border-black rounded-md px-1" onClick={() => moveUp(index)}>&uarr;</button>}
-            {index !== (items.length - 1) && <button className="border border-black rounded-md px-1" onClick={() => moveDown(index)}>&darr;</button>}
+        <div className="flex flex-row justify-center">
+            <Button variant="outlined" onClick={() => removeItem(index)}>Remove</Button>
+            {index !== 0 && <Button variant="outlined" className="min-w-0" onClick={() => moveUp(index)}>&uarr;</Button>}
+            {index !== (items.length - 1) && <Button variant="outlined" className="min-w-0" onClick={() => moveDown(index)}>&darr;</Button>}
         </div>
     );
 }

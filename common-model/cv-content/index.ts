@@ -3,8 +3,7 @@ import { Section } from './sections';
 export interface CvContent {
     title: string;
     name: string;
-    country?: string;
-    city?: string;
+    location?: string;
     email?: string;
     phone?: string;
     photo?: string;

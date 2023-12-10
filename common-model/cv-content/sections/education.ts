@@ -7,7 +7,7 @@ export interface SectionEducation extends SectionBase {
 
 export interface SectionEducationItem {
     _id: string;
-    _title: string;
+    title: string;
     institution: string;
     city: string;
     country: string;

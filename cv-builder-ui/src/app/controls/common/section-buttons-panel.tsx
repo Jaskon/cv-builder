@@ -1,11 +1,12 @@
-import { SectionPlacement } from '../../../../../common-model/cv-content/sections';
+import { Section, SectionPlacement } from '../../../../../common-model/cv-content/sections';
+import { Button } from '@mui/material';
 
 interface Props {
     addItem?: () => void;
     moveUp: () => void;
     moveDown: () => void;
-    section: any;
-    setSection: (data: any) => void;
+    section: Section;
+    setSection: (data: any) => void;  // TODO: what to replace 'any' with?
     isFirst: boolean;
     isLast: boolean;
 }
@@ -14,31 +15,31 @@ export default function SectionButtonsPanel({ addItem, moveUp, moveDown, section
     const moveRight = () => {
         setSection({
             ...section,
-            placement: SectionPlacement.right
+            _placement: SectionPlacement.right
         });
     }
 
     const moveLeft = () => {
         setSection({
             ...section,
-            placement: SectionPlacement.left
+            _placement: SectionPlacement.left
         });
     }
 
     return (
         <div className="flex flex-row gap-1">
             <div className="flex flex-row">
-                {section.placement === SectionPlacement.left && <button className="border border-black rounded-md px-1" onClick={() => moveRight()}>&rarr;</button>}
-                {section.placement === SectionPlacement.right && <button className="border border-black rounded-md px-1" onClick={() => moveLeft()}>&larr;</button>}
+                {section._placement === SectionPlacement.left && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveRight()}>&rarr;</Button>}
+                {section._placement === SectionPlacement.right && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveLeft()}>&larr;</Button>}
             </div>
 
             <div className="flex flex-row">
-                {!isFirst && <button className="border border-black rounded-md px-1" onClick={() => moveUp()}>&uarr;</button>}
-                {!isLast && <button className="border border-black rounded-md px-1" onClick={() => moveDown()}>&darr;</button>}
+                {!isFirst && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveUp()}>&uarr;</Button>}
+                {!isLast && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveDown()}>&darr;</Button>}
             </div>
 
             {addItem &&
-                <div className="text-[30px] cursor-pointer mt-[-4px] px-1" onClick={() => addItem()}>+</div>
+                <Button size="small" variant="outlined" className="min-w-0" onClick={() => addItem()}>+</Button>
             }
         </div>
     );

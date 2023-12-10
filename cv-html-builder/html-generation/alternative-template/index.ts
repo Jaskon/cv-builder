@@ -15,7 +15,7 @@ export default function generateCvHtml(data: CvContent): string {
                 <div>Alternative template here!</div>
                 
                 <div>${data.name}</div>
-                <div>${data.country}</div>
+                <div>${data.location}</div>
             </body>
         </html>
     `;

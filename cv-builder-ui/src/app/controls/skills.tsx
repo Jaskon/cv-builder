@@ -6,6 +6,8 @@ import {
     SectionSkillsItemLevel
 } from '../../../../common-model/cv-content/sections/skills';
 import SectionButtonsPanel from '@/app/controls/common/section-buttons-panel';
+import { Checkbox, FormControlLabel, Paper, Slider, TextField } from '@mui/material';
+import { useTransition } from 'react';
 
 interface Props {
     section: SectionSkills;
@@ -17,10 +19,14 @@ interface Props {
 }
 
 export default function SkillsSection({ section, setSection, moveUp, moveDown, isFirst, isLast }: Props) {
+    const [_, startTransition] = useTransition();
+
     const updateItem = (id: string, item: Partial<SectionSkillsItem>) => {
-        setSection({
-            ...section,
-            items: section.items.map(oldItem => oldItem._id === id ? { ...oldItem, ...item } : oldItem)
+        startTransition(() => {
+            setSection({
+                ...section,
+                items: section.items.map(oldItem => oldItem._id === id ? { ...oldItem, ...item } : oldItem)
+            });
         });
     }
 
@@ -49,29 +55,31 @@ export default function SkillsSection({ section, setSection, moveUp, moveDown, i
         });
     }
 
-    return <div className="flex flex-col gap-2 border border-black p-4 rounded-lg">
+    return <Paper elevation={4} className="flex flex-col gap-2 p-4">
         <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
-                <input type="checkbox" checked={section._enabled} onChange={e => updateSection({ _enabled: e.target.checked })} />
-                <div className="text-lg font-bold">{section._title || 'Skills'}</div>
+                <FormControlLabel control={
+                    <Checkbox checked={section._enabled} onChange={e => updateSection({ _enabled: e.target.checked })} />
+                } label={section._title} />
             </div>
             <SectionButtonsPanel addItem={addItem} section={section} setSection={setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />
         </div>
 
         <div className="flex flex-col gap-3">
             {section.items.map((item, index) =>
-                <div key={item._id} className="flex flex-col gap-1 border border-gray-300 rounded-lg p-4">
-                    <input value={item.name} placeholder="Name" onChange={e => updateItem(item._id, {name: e.target.value})}/>
-                    <input
-                        type="range"
+                <Paper key={item._id} className="flex flex-col gap-1 p-4">
+                    <TextField size="small" variant="outlined" value={item.name} placeholder="Name" onChange={e => updateItem(item._id, {name: e.target.value})}/>
+                    <Slider
                         min={0}
                         max={10}
+                        step={1}
+                        marks
                         value={item.level}
-                        placeholder="Level"
-                        onChange={e => updateItem(item._id, {level: +e.target.value as SectionSkillsItemLevel})}/>
+                        onChange={(e, value) => updateItem(item._id, {level: value as SectionSkillsItemLevel})}
+                    />
                     <ItemButtonsPanel items={section.items} updateItems={updateItems} index={index} />
-                </div>
+                </Paper>
             )}
         </div>
-    </div>;
+    </Paper>;
 }

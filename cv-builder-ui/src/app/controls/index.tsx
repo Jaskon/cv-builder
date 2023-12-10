@@ -5,6 +5,7 @@ import ExperienceSection from '@/app/controls/experience';
 import clsx from 'clsx';
 import SkillsSection from '@/app/controls/skills';
 import ProfileSection from '@/app/controls/profile';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 interface Props {
     className?: string;
@@ -54,14 +55,14 @@ export default function ControlsComponent({ className, content, setContent, temp
         updateSections(newSections);
     }
 
-    return <div className={clsx('flex flex-col gap-2', className)}>
-        <div>
-            <label className="block">Template</label>
-            <select value={template} onChange={e => setTemplate(e.target.value as Template)} className="bg-white">
-                <option value={Template.default}>Default</option>
-                <option value={Template.alternative}>Alternative</option>
-            </select>
-        </div>
+    return <div className={clsx('flex flex-col gap-6', className)}>
+        <FormControl fullWidth>
+            <InputLabel id="template-label">Template</InputLabel>
+            <Select labelId="template-label" label="Template" value={template} onChange={e => setTemplate(e.target.value as Template)}>
+                <MenuItem value={Template.default}>Default</MenuItem>
+                <MenuItem value={Template.alternative}>Alternative</MenuItem>
+            </Select>
+        </FormControl>
 
         <div>
             <label className="block">Photo</label>
@@ -76,37 +77,17 @@ export default function ControlsComponent({ className, content, setContent, temp
             }} />
         </div>
 
-        <div>
-            <label className="block">Title</label>
-            <input value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
-        </div>
+        <TextField label="Title" variant="outlined" className="w-full" value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
 
-        <div>
-            <label className="block">Name</label>
-            <input value={content.name || ''} onChange={e => setContent({ ...content, name: e.target.value })} />
-        </div>
+        <TextField label="Name" variant="outlined" className="w-full" value={content.name || ''} onChange={e => setContent({ ...content, name: e.target.value })} />
 
-        <div>
-            <label className="block">Country</label>
-            <input value={content.country || ''} onChange={e => setContent({ ...content, country: e.target.value })} />
-        </div>
+        <TextField label="Location" variant="outlined" className="w-full" value={content.location || ''} onChange={e => setContent({ ...content, location: e.target.value })} />
 
-        <div>
-            <label className="block">City</label>
-            <input value={content.city || ''} onChange={e => setContent({ ...content, city: e.target.value })} />
-        </div>
+        <TextField label="Email" variant="outlined" className="w-full" value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
 
-        <div>
-            <label className="block">Email</label>
-            <input value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
-        </div>
+        <TextField label="Phone" variant="outlined" className="w-full" value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
 
-        <div>
-            <label className="block">Phone</label>
-            <input value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
-        </div>
-
-        <button className="border border-black rounded p-1" onClick={() => submit()}>Generate PDF (into backend folder)</button>
+        <Button variant="contained" onClick={() => submit()}>Generate PDF (into backend folder)</Button>
 
         <div className="flex flex-col gap-2">
             {content.sections.map(

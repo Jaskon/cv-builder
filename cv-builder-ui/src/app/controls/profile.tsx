@@ -1,5 +1,7 @@
 import SectionButtonsPanel from '@/app/controls/common/section-buttons-panel';
 import { SectionProfile } from '../../../../common-model/cv-content/sections/profile';
+import { Checkbox, FormControlLabel, Paper, TextField } from '@mui/material';
+import { useTransition } from 'react';
 
 interface Props {
     section: SectionProfile;
@@ -11,24 +13,29 @@ interface Props {
 }
 
 export default function ProfileSection({ section, setSection, moveUp, moveDown, isFirst, isLast }: Props) {
+    const [_, startTransition] = useTransition();
+
     const updateSection = (patchSection: Partial<SectionProfile>) => {
-        setSection({
-            ...section,
-            ...patchSection
+        startTransition(() => {
+            setSection({
+                ...section,
+                ...patchSection
+            });
         });
     }
 
-    return <div className="flex flex-col gap-2 border border-black p-4 rounded-lg">
+    return <Paper elevation={4} className="flex flex-col gap-2 p-4">
         <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
-                <input type="checkbox" checked={section._enabled} onChange={e => updateSection({ _enabled: e.target.checked })} />
-                <div className="text-lg font-bold">{section._title || 'Education'}</div>
+                <FormControlLabel control={
+                    <Checkbox checked={section._enabled} onChange={e => updateSection({ _enabled: e.target.checked })} />
+                } label={section._title} />
             </div>
             <SectionButtonsPanel section={section} setSection={setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />
         </div>
 
         <div className="flex flex-col gap-4">
-            <textarea className="border border-black rounded p-1" value={section.text || ''} onChange={e => updateSection({ text: e.target.value })} />
+            <TextField multiline size="small" variant="outlined" value={section.text || ''} onChange={e => updateSection({ text: e.target.value })} />
         </div>
-    </div>;
+    </Paper>;
 }

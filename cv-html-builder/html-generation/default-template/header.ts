@@ -68,7 +68,7 @@ export default function header(content: CvContent) {
                     </div>
                     <div class="header-info-subtitle-item"">
                         ${locationSvg()}
-                        <div>${content.city}</div>
+                        <div>${content.location}</div>
                     </div>
                 </div>
             </div>

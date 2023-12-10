@@ -13,7 +13,7 @@ export default function sectionEducation(data: SectionEducation) {
                             <div>${item.institution}</div>
                             ${sectionDate(item)}
                         </div>
-                        <div>${item._title}</div>
+                        <div>${item.title}</div>
                         ${city(item)}
                         ${country(item)}
                     </div>

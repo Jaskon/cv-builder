@@ -13,7 +13,7 @@ export default function sectionExperience(data: SectionExperience) {
                             <div>${item.company}</div>
                             ${sectionDate(item)}
                         </div>
-                        <div>${item._title}</div>
+                        <div>${item.title}</div>
                         ${description(item)}
                     </div>
                 `).join(`
