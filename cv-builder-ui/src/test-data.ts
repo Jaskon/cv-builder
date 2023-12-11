@@ -10,6 +10,8 @@ try {
     cvContent = {
         title: 'Frontend Developer',
         name: 'John Doe',
+        email: 'john.doe@example.com',
+        phone: '+12 345 678 901',
         location: 'United Kingdom',
         sections: [{
             _id: uuidv4(),
@@ -47,20 +49,6 @@ try {
             _enabled: true,
             _placement: SectionPlacement.right,
             _title: 'Experience',
-            items: [{
-                _id: '1',
-                title: 'Frontend Developer',
-                company: 'Google',
-                startDate: '2014',
-                endDate: '2016',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            }]
-        }, {
-            _id: uuidv4(),
-            _type: SectionType.experience,
-            _enabled: true,
-            _placement: SectionPlacement.right,
-            _title: 'Experience 2',
             items: [{
                 _id: '1',
                 title: 'Frontend Developer',

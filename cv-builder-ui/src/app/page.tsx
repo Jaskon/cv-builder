@@ -20,9 +20,9 @@ export default function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between py-4">
             <div className="flex flex-row items-stretch gap-8 content w-fit">
-                <div className="grow-1 w-[350px]">
+                <div className="grow-1 w-[400px]">
                     <ControlsComponent
-                        className="fixed w-[350px] overflow-y-auto top-0 h-full pt-8 pb-2 box-border px-4"
+                        className="fixed w-[400px] overflow-y-auto top-0 h-full pt-8 pb-2 box-border px-4"
                         content={content}
                         setContent={setContent}
                         template={template}
@@ -36,7 +36,7 @@ export default function Home() {
                 <div className="border-black border box-content p-5 w-[795px] h-[1124px]">
 
                     <iframe
-                        className="w-full h-full"
+                        className="w-full h-full border border-black"
                         srcDoc={generateCvHtml(content, template)}
                     ></iframe>
                 </div>

@@ -6,6 +6,9 @@ import clsx from 'clsx';
 import SkillsSection from '@/app/controls/skills';
 import ProfileSection from '@/app/controls/profile';
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 interface Props {
     className?: string;
@@ -56,6 +59,8 @@ export default function ControlsComponent({ className, content, setContent, temp
     }
 
     return <div className={clsx('flex flex-col gap-6', className)}>
+        <Button variant="contained" onClick={() => submit()} startIcon={<FileDownloadIcon />}>Generate PDF (into backend folder)</Button>
+
         <FormControl fullWidth>
             <InputLabel id="template-label">Template</InputLabel>
             <Select labelId="template-label" label="Template" value={template} onChange={e => setTemplate(e.target.value as Template)}>
@@ -64,17 +69,27 @@ export default function ControlsComponent({ className, content, setContent, temp
             </Select>
         </FormControl>
 
-        <div>
-            <label className="block">Photo</label>
-            <input type="file" className="w-56" onChange={e => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = () => {
-                    setContent({ ...content, photo: reader.result as string });
-                };
-                reader.readAsDataURL(file);
-            }} />
+        <div className="flex flex-row gap-0.5">
+            <Button className="grow" component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+                Upload photo
+                <input type="file" className="absolute top-0 left-0 hidden" onChange={e => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        setContent({ ...content, photo: reader.result as string });
+                    };
+                    reader.readAsDataURL(file);
+                }} />
+            </Button>
+            <Button
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              disabled={!content.photo}
+              onClick={() => setContent({ ...content, photo: undefined })}
+            >
+                Clear
+            </Button>
         </div>
 
         <TextField label="Title" variant="outlined" className="w-full" value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
@@ -86,8 +101,6 @@ export default function ControlsComponent({ className, content, setContent, temp
         <TextField label="Email" variant="outlined" className="w-full" value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
 
         <TextField label="Phone" variant="outlined" className="w-full" value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
-
-        <Button variant="contained" onClick={() => submit()}>Generate PDF (into backend folder)</Button>
 
         <div className="flex flex-col gap-2">
             {content.sections.map(
