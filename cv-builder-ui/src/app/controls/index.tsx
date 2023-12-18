@@ -1,3 +1,4 @@
+import { Children } from 'react'
 import EducationSection from '@/app/controls/education';
 import { Section, SectionType } from '../../../../common-model/cv-content/sections';
 import { CvContent, Template } from '../../../../common-model/cv-content';
@@ -5,7 +6,17 @@ import ExperienceSection from '@/app/controls/experience';
 import clsx from 'clsx';
 import SkillsSection from '@/app/controls/skills';
 import ProfileSection from '@/app/controls/profile';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import {
+    Button,
+    Divider,
+    FormControl,
+    IconButton,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+    Tooltip
+} from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -59,48 +70,104 @@ export default function ControlsComponent({ className, content, setContent, temp
     }
 
     return <div className={clsx('flex flex-col gap-6', className)}>
-        <Button variant="contained" onClick={() => submit()} startIcon={<FileDownloadIcon />}>Generate PDF (into backend folder)</Button>
-
-        <FormControl fullWidth>
-            <InputLabel id="template-label">Template</InputLabel>
-            <Select labelId="template-label" label="Template" value={template} onChange={e => setTemplate(e.target.value as Template)}>
-                <MenuItem value={Template.default}>Default</MenuItem>
-                <MenuItem value={Template.alternative}>Alternative</MenuItem>
-            </Select>
-        </FormControl>
-
-        <div className="flex flex-row gap-0.5">
-            <Button className="grow" component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                Upload photo
-                <input type="file" className="absolute top-0 left-0 hidden" onChange={e => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        setContent({ ...content, photo: reader.result as string });
-                    };
-                    reader.readAsDataURL(file);
-                }} />
-            </Button>
-            <Button
-              variant="outlined"
-              startIcon={<DeleteIcon />}
-              disabled={!content.photo}
-              onClick={() => setContent({ ...content, photo: undefined })}
+        <div className="flex justify-between">
+            <FormControl className="w-[170px]">
+                <InputLabel id="template-label">CV Template</InputLabel>
+                <Select
+                    className="capitalize h-[40px]"
+                    labelId="template-label"
+                    label="CV Template"
+                    value={template}
+                    onChange={e => setTemplate(e.target.value as Template)}
+                >
+                    {Children.toArray(
+                        Object.keys(Template).map((templateKey) => (
+                            <MenuItem
+                                className="capitalize"
+                                value={templateKey}
+                            >
+                                {templateKey}
+                            </MenuItem>
+                        ))
+                    )}
+                </Select>
+            </FormControl>
+            <Tooltip
+                title="File to be saved into backend folder"
+                placement="top"
             >
-                Clear
-            </Button>
+                <Button
+                    className="bg-seagreen hover:bg-dark-seagreen w-[160px] h-[40px] rounded-full"
+                    variant="contained"
+                    onClick={() => submit()}
+                    startIcon={<FileDownloadIcon />}
+                >
+                    Generate PDF
+                </Button>
+            </Tooltip>
         </div>
 
-        <TextField label="Title" variant="outlined" className="w-full" value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
+        <Divider />
 
-        <TextField label="Name" variant="outlined" className="w-full" value={content.name || ''} onChange={e => setContent({ ...content, name: e.target.value })} />
+        <TextField label="Position title" variant="outlined" className="w-full" value={content.title || ''} onChange={e => setContent({ ...content, title: e.target.value })} />
 
-        <TextField label="Location" variant="outlined" className="w-full" value={content.location || ''} onChange={e => setContent({ ...content, location: e.target.value })} />
+        <div className="flex justify-between">
+            <div className="w-[225px]" >
+                <div className={clsx('w-[170px] h-[215px] flex items-center justify-center mb-5', { 'border-light-gray border-dashed bg-silver': !content.photo })}>
+                    {content.photo ? (
+                        <img
+                            src={content.photo}
+                            className="object-contain max-w-full mb-4"
+                            alt="User avatar preview"
+                        />
+                    ) : (
+                        <div className="h-[16px]">No photo added</div>
+                    )}
+                </div>
+                <div className="flex gap-x-1 w-[220px]">
+                    <Button
+                        className="w-[170px] h-[35px] rounded-full"
+                        component="label"
+                        variant="contained"
+                        startIcon={<CloudUploadIcon />}
+                    >
+                        Upload photo
+                        <input
+                            type="file"
+                            className="absolute top-0 left-0 hidden"
+                            onChange={e => {
+                                const file = e.target.files?.[0];
+                                if (!file) return;
+                                const reader = new FileReader();
+                                reader.onload = () => {
+                                    setContent({ ...content, photo: reader.result as string });
+                                };
+                                reader.readAsDataURL(file);
+                            }}
+                        />
+                    </Button>
+                    {content.photo && (
+                        <IconButton
+                            color="error"
+                            onClick={() => setContent({ ...content, photo: undefined })}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                    )}
+                </div>
+            </div>
+            <div>
+                <TextField label="Full name" variant="outlined" className="w-full mb-4" value={content.name || ''} onChange={e => setContent({ ...content, name: e.target.value })} />
 
-        <TextField label="Email" variant="outlined" className="w-full" value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
+                <TextField label="Location" variant="outlined" className="w-full mb-4" value={content.location || ''} onChange={e => setContent({ ...content, location: e.target.value })} />
 
-        <TextField label="Phone" variant="outlined" className="w-full" value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
+                <TextField label="Email" variant="outlined" className="w-full mb-4" value={content.email || ''} onChange={e => setContent({ ...content, email: e.target.value })} />
+
+                <TextField label="Phone" variant="outlined" className="w-full mb-4" value={content.phone || ''} onChange={e => setContent({ ...content, phone: e.target.value })} />
+            </div>
+        </div>
+
+        <Divider />
 
         <div className="flex flex-col gap-2">
             {content.sections.map(
