@@ -1,17 +1,30 @@
 import { Section, SectionPlacement } from '../../../../../common-model/cv-content/sections';
-import { Button } from '@mui/material';
+import { Add, ArrowBack, ArrowDownward, ArrowForward, ArrowUpward, Delete } from "@mui/icons-material";
+import { IconButton } from '@mui/material';
 
 interface Props {
     addItem?: () => void;
+    deleteItem?: () => void
     moveUp: () => void;
     moveDown: () => void;
-    section: Section;
-    setSection: (data: any) => void;  // TODO: what to replace 'any' with?
     isFirst: boolean;
     isLast: boolean;
+    section: Section;
+    setSection: (data: any) => void;  // TODO: what to replace 'any' with?
+    horizontalMove?: boolean
 }
 
-export default function SectionButtonsPanel({ addItem, moveUp, moveDown, section, setSection, isFirst, isLast }: Props) {
+export default function SectionButtonsPanel({
+    addItem,
+    deleteItem,
+    moveUp,
+    moveDown,
+    section,
+    setSection,
+    isFirst,
+    isLast,
+    horizontalMove,
+}: Props) {
     const moveRight = () => {
         setSection({
             ...section,
@@ -28,19 +41,64 @@ export default function SectionButtonsPanel({ addItem, moveUp, moveDown, section
 
     return (
         <div className="flex flex-row gap-1">
-            <div className="flex flex-row">
-                {section._placement === SectionPlacement.left && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveRight()}>&rarr;</Button>}
-                {section._placement === SectionPlacement.right && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveLeft()}>&larr;</Button>}
-            </div>
+            {horizontalMove && (
+                <div className="flex flex-row">
+                    {section._placement === SectionPlacement.left && (
+                        <IconButton
+                            size="small"
+                            onClick={() => moveRight()}
+                        >
+                            <ArrowBack />
+                        </IconButton>
+                    )}
+                    {section._placement === SectionPlacement.right && (
+                        <IconButton
+                            size="small"
+                            onClick={() => moveLeft()}
+                        >
+                            <ArrowForward className="" />
+                        </IconButton>
+                    )}
+                </div>
+            )}
 
             <div className="flex flex-row">
-                {!isFirst && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveUp()}>&uarr;</Button>}
-                {!isLast && <Button size="small" variant="outlined" className="min-w-0" onClick={() => moveDown()}>&darr;</Button>}
+                {!isFirst && (
+                    <IconButton
+                        size="small"
+                        onClick={() => moveUp()}
+                    >
+                        <ArrowUpward />
+                    </IconButton>
+                )}
+                {!isLast && (
+                    <IconButton
+                        size="small"
+                        onClick={() => moveDown()}
+                    >
+                        <ArrowDownward />
+                    </IconButton>
+                )}
             </div>
 
-            {addItem &&
-                <Button size="small" variant="outlined" className="min-w-0" onClick={() => addItem()}>+</Button>
-            }
+            {addItem && (
+                <IconButton
+                    size="small"
+                    onClick={() => addItem()}
+                >
+                    <Add />
+                </IconButton>
+            )}
+
+            {deleteItem && (
+                <IconButton
+                    size="small"
+                    color="error"
+                    onClick={deleteItem}
+                >
+                    <Delete />
+                </IconButton>
+            )}
         </div>
     );
 }

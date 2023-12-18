@@ -62,7 +62,16 @@ export default function SkillsSection({ section, setSection, moveUp, moveDown, i
                     <Checkbox checked={section._enabled} onChange={e => updateSection({ _enabled: e.target.checked })} />
                 } label={section._title} />
             </div>
-            <SectionButtonsPanel addItem={addItem} section={section} setSection={setSection} moveUp={moveUp} moveDown={moveDown} isFirst={isFirst} isLast={isLast} />
+            <SectionButtonsPanel
+                addItem={addItem}
+                section={section}
+                setSection={setSection}
+                moveUp={moveUp}
+                moveDown={moveDown}
+                isFirst={isFirst}
+                isLast={isLast}
+                horizontalMove
+            />
         </div>
 
         <div className="flex flex-col gap-3">
