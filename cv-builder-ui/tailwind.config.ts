@@ -16,6 +16,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'seagreen': '#2f4f4f',
+        'dark-seagreen': '#233d3d',
+        'lavender': '#acace6',
+        'lavender-lavender': '#8282b5',
+        'light-gray': '#d6d6d6',
+        'silver': '#eeeeee',
+        'canary': '#e8Bd3d'
+      }
     },
   },
   plugins: [],
