@@ -1,5 +1,5 @@
 import express from 'express';
-import { generatePdf, validateData } from './pdf';
+import { downloadPdf, getPdf, validateData } from './pdfGenerator';
 import { IGeneratePdfApi } from '../../common-model/generatePdf';
 
 const router = express.Router();
@@ -13,12 +13,11 @@ router.post('/generate-pdf', async (req, res) => {
         return;
     }
 
-    await generatePdf(data.content, data.template);
-    res.send('Done!');
-});
+    const pdfGenerated = await getPdf(data.content, data.template);
+    await downloadPdf(data.content, data.template);
 
-router.get('/generate-html', async (req, res) => {
-    res.sendFile('index.html', { root: __dirname + '/../../cv-html-builder-preact/dist' });
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdfGenerated);
 });
 
 export default router;

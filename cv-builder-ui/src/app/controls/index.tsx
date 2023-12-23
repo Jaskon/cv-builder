@@ -16,10 +16,11 @@ interface Props {
     setContent: (data: CvContent) => void;
     template: Template;
     setTemplate: (template: Template) => void;
-    submit: () => void;
+    onDownload: () => void;
+    onPreview: () => void;
 }
 
-export default function ControlsComponent({ className, content, setContent, template, setTemplate, submit }: Props) {
+export default function ControlsComponent({ className, content, setContent, template, setTemplate, onDownload, onPreview }: Props) {
     const updateSection = (id: string, section: Section) => {
         setContent({
             ...content,
@@ -59,7 +60,10 @@ export default function ControlsComponent({ className, content, setContent, temp
     }
 
     return <div className={clsx('flex flex-col gap-6', className)}>
-        <Button variant="contained" onClick={() => submit()} startIcon={<FileDownloadIcon />}>Generate PDF (into backend folder)</Button>
+        <div className="w-full flex gap-1">
+            <Button variant="contained" className="grow" onClick={() => onDownload()} startIcon={<FileDownloadIcon />}>Download PDF</Button>
+            <Button variant="contained" className="grow" onClick={() => onPreview()} startIcon={<FileDownloadIcon />}>Preview</Button>
+        </div>
 
         <FormControl fullWidth>
             <InputLabel id="template-label">Template</InputLabel>
