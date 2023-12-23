@@ -12,6 +12,16 @@ export default function generateCvHtml(content: CvContent): string {
             <head>
                 <title>${content.title}</title>
                 <style>
+                    @page {
+                        size: A4 portrait;
+                        margin-bottom: 20px;
+                        margin-top: 20px; 
+                    }
+                    
+                    @page:first {
+                        margin-top: 0; 
+                    }
+                    
                     :root {
                         --content-wrapper-padding: 34px;
                     }

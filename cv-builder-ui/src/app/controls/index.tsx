@@ -27,10 +27,11 @@ interface Props {
     setContent: (data: CvContent) => void;
     template: Template;
     setTemplate: (template: Template) => void;
-    submit: () => void;
+    onDownload: () => void;
+    onPreview: () => void;
 }
 
-export default function ControlsComponent({ className, content, setContent, template, setTemplate, submit }: Props) {
+export default function ControlsComponent({ className, content, setContent, template, setTemplate, onDownload, onPreview }: Props) {
     const updateSection = (id: string, section: Section) => {
         setContent({
             ...content,
@@ -97,12 +98,25 @@ export default function ControlsComponent({ className, content, setContent, temp
                 placement="top"
             >
                 <Button
-                    className="bg-seagreen hover:bg-dark-seagreen w-[160px] h-[40px] rounded-full"
+                    className="bg-seagreen hover:bg-dark-seagreen h-[40px] rounded-full"
                     variant="contained"
-                    onClick={() => submit()}
+                    onClick={() => onDownload()}
                     startIcon={<FileDownloadIcon />}
                 >
-                    Generate PDF
+                    Download PDF
+                </Button>
+            </Tooltip>
+            <Tooltip
+                title="Click every time for preview (wip to be automatic)"
+                placement="top"
+            >
+                <Button
+                    className="bg-seagreen hover:bg-dark-seagreen h-[40px] rounded-full"
+                    variant="contained"
+                    onClick={() => onPreview()}
+                    startIcon={<FileDownloadIcon />}
+                >
+                    Preview
                 </Button>
             </Tooltip>
         </div>
