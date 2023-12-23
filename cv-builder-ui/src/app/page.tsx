@@ -17,9 +17,9 @@ export default function Home() {
     const [cvHtml, setCvHtml] = useState<string>('');
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center py-4 w-[fit]">
+        <main className="flex min-h-[--full-h-without-padding] flex-col items-center justify-center p-[--global-padding] w-[fit]">
             <div className="flex flex-row items-stretch gap-8 content w-[1500px]">
-                <div className="sticky grow-1 w-[900px] h-[500px] overflow-y-auto">
+                <div className="sticky top-[--global-padding] grow-1 w-[900px] h-[--full-h-without-padding] overflow-y-auto">
                     <ControlsComponent
                         className="pt-8 pb-2 box-border px-4"
                         content={content}

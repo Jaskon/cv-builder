@@ -5,9 +5,13 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 229, 234, 235;
+
+  --global-padding: 16px;
+  --full-h-without-padding: calc(100vh - var(--global-padding) * 2);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  margin: 0;
 }
