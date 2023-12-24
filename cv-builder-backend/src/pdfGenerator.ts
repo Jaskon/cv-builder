@@ -1,9 +1,8 @@
-import puppeteer, { Browser, Page } from 'puppeteer';
+import puppeteer, { Browser } from 'puppeteer';
 import generateCvHtml from '../../cv-html-builder/html-generation';
 import { CvContent, Template } from '../../common-model/cv-content';
 
 let browser: Browser = null;
-let page: Page = null;
 
 async function getBrowser(): Promise<Browser> {
     if (browser) {
@@ -18,6 +17,7 @@ async function getBrowser(): Promise<Browser> {
 }
 
 async function getPage(browser: Browser) {
+    let page = (await browser.pages())[0];
     if (page) {
         console.info('Using existing page');
         return page;
@@ -38,7 +38,7 @@ async function getFilledPage(data: CvContent, template?: Template) {
 
 export async function getPdf(data: CvContent, template?: Template) {
     const page = await getFilledPage(data, template);
-    return await page.pdf({ format: 'A4' });
+    return await page.pdf({ format: 'A4', preferCSSPageSize: true });
 }
 
 export async function downloadPdf(data: CvContent, template?: Template) {

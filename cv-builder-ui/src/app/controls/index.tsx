@@ -28,10 +28,9 @@ interface Props {
     template: Template;
     setTemplate: (template: Template) => void;
     onDownload: () => void;
-    onPreview: () => void;
 }
 
-export default function ControlsComponent({ className, content, setContent, template, setTemplate, onDownload, onPreview }: Props) {
+export default function ControlsComponent({ className, content, setContent, template, setTemplate, onDownload }: Props) {
     const updateSection = (id: string, section: Section) => {
         setContent({
             ...content,
@@ -104,19 +103,6 @@ export default function ControlsComponent({ className, content, setContent, temp
                     startIcon={<FileDownloadIcon />}
                 >
                     Download PDF
-                </Button>
-            </Tooltip>
-            <Tooltip
-                title="Click every time for preview (wip to be automatic)"
-                placement="top"
-            >
-                <Button
-                    className="bg-seagreen hover:bg-dark-seagreen h-[40px] rounded-full"
-                    variant="contained"
-                    onClick={() => onPreview()}
-                    startIcon={<FileDownloadIcon />}
-                >
-                    Preview
                 </Button>
             </Tooltip>
         </div>
